@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<title>Formação Copilot Pro</title>
+<style>
+        body { margin: 0; font-family: Arial, sans-serif; display: flex; height: 100vh; }
+        nav { width: 250px; background: #1e1e2f; color: white; padding: 20px; box-sizing: border-box; }
+        nav h1 { font-size: 20px; margin-bottom: 20px; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin: 10px 0; cursor: pointer; }
+        nav li:hover { text-decoration: underline; }
+        #content { flex: 1; padding: 30px; overflow-y: auto; }
+        .lang-toggle { position: absolute; top: 10px; right: 20px; }
+        .lang-toggle button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+<nav>
+<h1>Copilot Pro</h1>
+<ul>
+<li onclick="showSection('intro')">Introdução ao Copilot Pro</li>
+<li onclick="showSection('config')">Configuração da Conta</li>
+<li onclick="showSection('assistentes')">Assistentes Personalizados</li>
+<li onclick="showSection('exemplos')">Exemplos Práticos</li>
+<li onclick="showSection('vba')">Exercício com VBA + Excel</li>
+</ul>
+</nav>
+<div id="content">
+<div class="lang-toggle">
+<button onclick="setLang('pt')">🇵🇹</button>
+<button onclick="setLang('en')">🇬🇧</button>
+</div>
+<div id="section-content">
+<div data-lang="pt" id="main">
+<h2>Formação Copilot Pro</h2>
+<img alt="Imagem da formação" src="UploadedImage0.jpg" style="max-width:100%; height:auto; margin-bottom:20px;"/>
+<p>Escolhe uma das secções abaixo para começar:</p>
+<div style="display:flex; flex-direction:column; gap:10px;">
+<button onclick="showSection('intro')">Introdução</button>
+<button onclick="showSection('config')">Configuração da Conta</button>
+<button onclick="showSection('assistentes')">Assistentes Personalizados</button>
+<button onclick="showSection('exemplos')">Exemplos Práticos</button>
+<button onclick="showSection('vba')">Exercício com VBA + Excel</button>
+</div>
+</div>
+<div data-lang="en" id="main-en" style="display:none;">
+<h2>Copilot Pro Training</h2>
+<img alt="Training image" src="UploadedImage0.jpg" style="max-width:100%; height:auto; margin-bottom:20px;"/>
+<p>Select one of the sections below to begin:</p>
+<div style="display:flex; flex-direction:column; gap:10px;">
+<button onclick="showSection('intro')">Introduction</button>
+<button onclick="showSection('config')">Account Setup</button>
+<button onclick="showSection('assistentes')">Custom Assistants</button>
+<button onclick="showSection('exemplos')">Practical Examples</button>
+<button onclick="showSection('vba')">VBA + Excel Exercise</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".section");
+    const menuItems = document.querySelectorAll(".menu-item");
+    const langToggle = document.getElementById("lang-toggle");
+
+    let currentLang = "pt";
+
+    function showSection(id) {
+        sections.forEach(sec => sec.style.display = "none");
+        const target = document.getElementById(id);
+        if (target) target.style.display = "block";
+    }
+
+    function switchLanguage() {
+        currentLang = currentLang === "pt" ? "en" : "pt";
+        document.querySelectorAll("[data-lang]").forEach(el => {
+            el.style.display = el.getAttribute("data-lang") === currentLang ? "block" : "none";
+        });
+    }
+
+    menuItems.forEach(item => {
+        item.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-target");
+            showSection(targetId);
+        });
+    });
+
+    if (langToggle) {
+        langToggle.addEventListener("click", switchLanguage);
+    }
+
+    // Fallback to first section and language
+    showSection(sections[0].id);
+    switchLanguage();
+});
+</script>
+</body>
+</html>
